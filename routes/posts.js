@@ -17,6 +17,16 @@ router.get('/add', function(req, res, next) {
     });
 });
 
+router.get('/show/:id', function(req, res, next) {
+	var posts = db.get('posts');
+
+	posts.findById(req.params.id,function(err, post){
+		res.render('show',{
+  			'post': post
+  		});
+	});
+});
+
 /* GET users listing. */
 router.post('/add', upload.single('mainimage'), function(req, res, next) {
     var title = req.body.title; 
