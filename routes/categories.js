@@ -7,6 +7,16 @@ var mongo = require('mongodb');
 var db = require('monk')('localhost/nodeblog');
 
 
+router.get('/show/:category', function(req, res, next){
+    var posts = db.get('posts');
+   
+    posts.find({category: req.params.category}, {}, function(err, posts){
+        res.render('index', {
+            'title': req.params.category,
+            'posts': posts
+        });
+    });
+});
 
 router.get('/add', function(req, res, next) {
         res.render('addcategory', {
@@ -34,7 +44,7 @@ router.post('/add', function(req, res, next) {
                 res.send(err);
             }
             else {
-                req.flash('success', 'Post Added');
+                req.flash('success', 'Category Added');
                 res.location('/'); 
                 res.redirect('/');  
             }

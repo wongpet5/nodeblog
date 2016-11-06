@@ -64,4 +64,15 @@ router.post('/add', upload.single('mainimage'), function(req, res, next) {
     }
 });
 
+/*router.get('/show/:category', function(req, res, next){
+    var posts = db.get('posts');
+
+    categories.find({category: req.params.category}, {}, function(req, res, next){
+        res.render('index', {
+            'title': req.params.categories,
+            'categories': posts
+        });
+    });
+});
+*/
 module.exports = router;
